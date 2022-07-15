@@ -7,14 +7,15 @@ const marvelHeros = heroList.filter(hero => hero.publisher === "Marvel Comics");
 const dcHeros = heroList.filter(hero => hero.publisher === "DC Comics");
 
 
-function App() {
-  console.log(marvelHeros);
-  console.log(dcHeros);
-;  return (
-    <div className="App">
+class App extends React.Component {
+render() {
+    return(
+    <div className = "App" >
 
     </div>
   );
+}
+
 }
 
 export default App;
