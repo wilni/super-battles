@@ -1,49 +1,55 @@
 import './Battle.scss'
 import React from 'react'
 
-import {uid} from 'uid'
+import { uid } from 'uid'
 
 
 class Battle extends React.Component {
   //replace with props
-  hero = {
-    "name": "Captain Planet",
-    "img": "https://www.superherodb.com/pictures2/portraits/10/100/1285.jpg",
+  // hero = {
+  //   "name": "Captain Planet",
+  //   "img": "https://www.superherodb.com/pictures2/portraits/10/100/1285.jpg",
 
-    "intelligence": "50",
-    "strength": "88",
-    "speed": "75",
-    "durability": "80",
-    "power": "100",
-    "combat": "60"
-  }
+  //   "intelligence": "50",
+  //   "strength": "88",
+  //   "speed": "75",
+  //   "durability": "80",
+  //   "power": "100",
+  //   "combat": "60"
+  // }
 
-  enemy = {
-    "name": "Magneto",
-    "img": "https://www.superherodb.com/pictures2/portraits/10/100/12.jpg",
-    "intelligence": "88",
-    "strength": "80",
-    "speed": "27",
-    "durability": "84",
-    "power": "91",
-    "combat": "80"
-  }
+  // enemy = {
+  //   "name": "Magneto",
+  //   "img": "https://www.superherodb.com/pictures2/portraits/10/100/12.jpg",
+  //   "intelligence": "88",
+  //   "strength": "80",
+  //   "speed": "27",
+  //   "durability": "84",
+  //   "power": "91",
+  //   "combat": "80"
+  // }
 
-  colorChoices = ['red', 'blue','green']
+  colorChoices = ['red', 'blue', 'green']
   initialEnemyDmgChoice = this.colorChoices[Math.floor(Math.random() * 3)];
 
   state = {
     mode: 'attack',
     phase: 'initialize',
+    winner: '',
     hero: {
       health: 100,
       energy: 10,
-      moves: 6
+      moves: 6,
+      img: this.props.appState.heroData.image,
+      name: this.props.appState.heroData.name,
+      def: 0
     },
     enemy: {
       health: 100,
       nextDmg: 20,
-      nextType: this.initialEnemyDmgChoice
+      nextType: this.initialEnemyDmgChoice,
+      img: this.props.appState.opponentData.image,
+      name: this.props.appState.opponentData.name
     },
     cards: [],
 
@@ -55,39 +61,58 @@ class Battle extends React.Component {
     this.drawInitialCards();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevPops, prevState) {
     //Enemy logic
-    if (this.state.mode === 'defend'){
-      this.startNewRound(this.state.enemy.nextDmg);
+    if (this.state.winner) return;
+    if (this.state.hero.health <= 0){
+      this.setState({
+        ...this.state,
+        winner: this.state.enemy.name
+      })
+    }
+    else if (this.state.enemy.health <= 0){
+      this.setState({
+        ...this.state,
+        winner: this.state.hero.name
+      })
+    }
+    else if (this.state.mode === 'defend') {
+      this.startNewRound(prevState.enemy.nextDmg);
     }
   }
 
-  startNewRound(heroDmg = 0){
-    const newMode = this.state.mode=== 'attack' ? 'defend' : 'attack';
+  startNewRound(heroDmg = 0) {
+    const newMode = this.state.mode === 'attack' ? 'defend' : 'attack';
 
+    const newDefense = newMode === 'attack' ? 0 : this.state.hero.def
+    let dmg = heroDmg - this.state.hero.def;
+    if (dmg < 0) dmg = 0;
     const newHero = {
-      health: this.state.hero.health - heroDmg,
+      ...this.state.hero,
+      health: this.state.hero.health - dmg,
       energy: 10,
-      moves: 6
+      moves: 6,
+      def: newDefense
     }
 
     const nextColor = this.colorChoices[Math.floor(Math.random() * 3)];
 
     const newEnemy = {
+      ...this.state.enemy,
       health: this.state.enemy.health,
       nextDmg: Math.floor(Math.random() * 50) + 1,
-      nextType: nextColor  
+      nextType: nextColor
     }
 
     let cardHolder = [...this.state.cards];
-    if (newMode==='attack'){
+    if (newMode === 'attack') {
       cardHolder = []
       for (let i = 0; i < 6; i++) {
         cardHolder.push(this.drawRandomCard(uid()));
       }
     }
 
-    this.setState({...this.state, hero:newHero, enemy: newEnemy, mode: newMode, cards: cardHolder})
+    this.setState({ ...this.state, hero: newHero, enemy: newEnemy, mode: newMode, cards: cardHolder })
   }
 
   handleActionClick = (e) => {
@@ -97,18 +122,34 @@ class Battle extends React.Component {
       this.startNewRound();
       return;
     }
-
     if (!this.state.chosenCard) {
       return
     }
     if (this.state.hero.moves === 0) {
       return;
     }
-    else if (this.state.hero.energy < this.state.chosenCard.strength){
+    else if (this.state.hero.energy < this.state.chosenCard.strength) {
       return;
     }
-    
-    let newEnemyHealth = this.state.enemy.health - this.state.chosenCard.strength;
+
+    let newEnemyHealth = this.state.enemy.health;
+    let newHeroDef = this.state.hero.def;
+
+    if (ele.dataset.info === 'defend') {
+      let strength = this.state.chosenCard.strength;
+      if (this.state.chosenCard.color === 'red') {
+        strength = Math.ceil(strength * 1.5);
+      }
+      newHeroDef += parseInt(strength);
+    }
+    if (ele.dataset.info === 'attack') {
+      let strength = this.state.chosenCard.strength;
+      if (this.state.chosenCard.color === 'red') {
+        strength = Math.ceil(strength * 1.5);
+      }
+      newEnemyHealth = this.state.enemy.health - strength;
+    }
+
     let newEnergy = this.state.hero.energy - this.state.chosenCard.strength;
     let newMoves = this.state.hero.moves - 1;
 
@@ -121,7 +162,7 @@ class Battle extends React.Component {
     //remove used up card
     let targetIndex = -1;
     let targetId = this.state.chosenCard.index;
-    for (let i=0; i<newCards.length; i++){
+    for (let i = 0; i < newCards.length; i++) {
       let card = newCards[i];
       if (card.key == targetId) {
         targetIndex = i;
@@ -129,20 +170,21 @@ class Battle extends React.Component {
     }
 
     if (this.state.chosenCard.color === 'green') {
-      for (let i=0; i<3; i++) {
+      for (let i = 0; i < 3; i++) {
         newCards.push(this.drawRandomCard(uid()))
       }
     }
 
     if (targetIndex === -1) console.error('couldnt find card to remove')
-    
+
     newCards.splice(targetIndex, 1);
 
-    this.setState({ 
-      ...this.state, 
-      hero: {...this.state.hero, energy: newEnergy, moves: newMoves},
-      enemy: { ...this.state.enemy, health: newEnemyHealth }, 
-      cards: newCards, chosenCard : null })
+    this.setState({
+      ...this.state,
+      hero: { ...this.state.hero, energy: newEnergy, moves: newMoves, def: newHeroDef },
+      enemy: { ...this.state.enemy, health: newEnemyHealth },
+      cards: newCards, chosenCard: null
+    })
 
   }
 
@@ -152,9 +194,10 @@ class Battle extends React.Component {
     const index = card.dataset.index;
     const strength = card.dataset.strength
 
-    this.setState({ 
-      ...this.state, 
-      chosenCard: { color: color, strength: strength, index: index } })
+    this.setState({
+      ...this.state,
+      chosenCard: { color: color, strength: strength, index: index }
+    })
   }
 
   drawRandomCard = (keyVal) => {
@@ -189,9 +232,9 @@ class Battle extends React.Component {
   }
 
   render() {
-    let effect =''
+    let effect = ''
     let crit = ''
-    if (this.state.chosenCard){
+    if (this.state.chosenCard) {
       switch (this.state.chosenCard.color) {
         case 'red':
           effect = 'Deal 1.5 times the damage'
@@ -200,33 +243,40 @@ class Battle extends React.Component {
           effect = 'Recover 10 energy after using'
           break;
         case 'green':
-          effect = 'Gain another move'
-        break;
+          effect = 'Gain 2 cards'
+          break;
       }
     }
 
-
-    return (
+    if (this.state.winner) {
+      return(
+      <div className='battlepage'>
+        <h1>{this.state.winner} WINS!!!!</h1>
+      </div>
+      )
+    }
+    else return (
       <div className="battlepage">
 
         <div className='battle-row'>
           <div className='char-container char-container--hero' >
-            <h2 className="char-title char-title--hero">{this.hero.name}</h2>
-            <img className="char-img char-img--hero" src={this.hero.img} />
+            <h2 className="char-title char-title--hero">{this.state.hero.name}</h2>
+            <img className="char-img char-img--hero" src={this.state.hero.img} />
             <div className='char-vitals'>
               <p className='char-vitals__stat char-vitals__stat--health'>Health: {this.state.hero.health}</p>
               <p className='char-vitals__stat char-vitals__stat--energy'>Energy: {this.state.hero.energy}</p>
               <p className='char-vitals__stat char-vitals__stat--moves'>Moves: {this.state.hero.moves}</p>
+              <p className='char-vitals__stat'>DEFENSE: {this.state.hero.def}</p>
             </div>
           </div>
 
-          <div className={'action-panel' + (this.state.chosenCard !== null ? (' action-panel--' + this.state.chosenCard.color) : '' )}>
+          <div className={'action-panel' + (this.state.chosenCard !== null ? (' action-panel--' + this.state.chosenCard.color) : '')}>
             <div className='action-desc'>
               {this.state.chosenCard && <>
-                <p className='action-desc__info-bullet'>DEALS {this.state.chosenCard.strength} {this.state.mode} AND COSTS {this.state.chosenCard.strength} ENERGY</p>
-                
+                <p className='action-desc__info-bullet'>DEALS {this.state.chosenCard.strength} ATTACK/DEF AND COSTS {this.state.chosenCard.strength} ENERGY</p>
+
                 <p className='action-desc__info-bullet'>Effect: {effect}</p>
-                </>
+              </>
               }
             </div>
             <button className='action-button' onClick={this.handleActionClick} data-info='attack'>ATTACK!</button>
@@ -237,8 +287,8 @@ class Battle extends React.Component {
 
 
           <div className='char-container char-container--enemy' >
-            <h2 className="char-title char-title--enemy">{this.enemy.name}</h2>
-            <img className="char-img char-img--enemy" src={this.enemy.img} />
+            <h2 className="char-title char-title--enemy">{this.state.enemy.name}</h2>
+            <img className="char-img char-img--enemy" src={this.state.enemy.img} />
             <div className='char-vitals'>
               <p className='char-vitals__stat char-vitals__stat--health'>Health: {this.state.enemy.health}
               </p>

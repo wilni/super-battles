@@ -26,13 +26,20 @@ $alabaster: #FAFAFA;
   font-family: Bangers;
 }
 
+body {
+  background-color: $hero-red;
+}
+
 .battlepage {
-  min-height: vh;
+  min-height: 100vh;
+  background-color: $silver;
 }
 
 .battle-row {
   display: flex; 
   justify-content: space-between;
+  height: 75vh;
+
 }
 
 .char-container {
@@ -50,6 +57,17 @@ $alabaster: #FAFAFA;
 
 .char-container--enemy {
   margin-right: 5vw;
+}
+
+h1 {
+  width: 100%;
+  text-align: center;
+  color: $hero-blue;
+  font-size: 70px;
+  font-family: Bangers;
+  text-shadow: -4px -4px black;
+  margin-top: 40vh;
+  padding-top: 40px;
 }
 
 .char-title {
@@ -94,11 +112,11 @@ $alabaster: #FAFAFA;
 
 .action-panel {
   width: 20vw;
-  background-color: purple;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   background-color: white;
+  gap: 10px;
   &--red {
     background-color: $hero-red;
   }
@@ -113,9 +131,19 @@ $alabaster: #FAFAFA;
 }
 
 .action-desc {
-  color: $silver;
 
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  padding: 10px;
 
+  &__info-bullet {
+    font-size:20px;
+    font-family: Audiowide;
+    color: $mercury;
+  }
 }
 
 .action-button {
@@ -133,7 +161,7 @@ $alabaster: #FAFAFA;
 .cardrow {
   display: flex;
   justify-content: center;
-  height: 15vh;
+  height: 17vh;
   background-color: $hero-yellow;
   position: absolute;
   bottom: 10px;
@@ -141,13 +169,14 @@ $alabaster: #FAFAFA;
 }
 
 .card {
-  width: 5vw;
+  width: 6vw;
   border: 5px inset $mercury;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
   padding: 5px;
   color: $alabaster;
+  font-size: 20px;
 
   &--red {
     background-color: $hero-red;
