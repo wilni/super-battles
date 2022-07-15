@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home/Home.js'
 import Opponent from './pages/Opponent/Opponent.js'
 import Battle from './pages/Battle/Battle.js'
-import Dropdown from './components/Dropdown/Dropdown.js'
 import './App.scss';
 const heroList = require('./data/heros.json');
 const marvelHeros = heroList.filter(hero => hero.publisher === "Marvel Comics");
@@ -54,23 +53,6 @@ class App extends React.Component {
           }}/>
         </Switch>
       </Router>
-
-      // <div className = "App" >
-      //     <h1 className='selection-title'>Choose hero</h1>
-      //       <form>
-      //         <label>
-      //           <input onClick={this.handleClick} type="radio" name="universe"  value="marvel" defaultChecked className='selection__radio-button'/>
-      //           Marvel
-      //         </label>
-      //         <label>
-      //           <input onClick={this.handleClick} type="radio" name="universe"  value="DC"  className='selection__radio-button'/>
-      //           DC
-      //         </label>
-      //       </form>
-      //     <div className='selection'>
-      //       <Dropdown  list={this.state.universe} hero={this.state.hero} handleChange={this.handleChange}/>
-      //     </div>
-      // </div>
     );
   }
 
