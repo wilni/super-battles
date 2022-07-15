@@ -98,21 +98,24 @@ $alabaster: #FAFAFA;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-}
-
-.action-desc {
-
+  background-color: white;
   &--red {
-
+    background-color: $hero-red;
   }
 
   &--green {
-
+    background-color: $hero-green;
   }
 
   &--blue {
-
+    background-color: $hero-blue;
   }
+}
+
+.action-desc {
+  color: $silver;
+
+
 }
 
 .action-button {
