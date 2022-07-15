@@ -1,5 +1,5 @@
 @use '../../App.scss' as *;
-
+@use '../../partials/fonts' as *;
 
 
 .selection {
@@ -21,6 +21,7 @@
         flex-direction: column;
         align-items: center;
         row-gap: 2rem;
+        font-family: "AudioWide";
     }
 
     &__title {
