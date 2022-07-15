@@ -1,5 +1,17 @@
 import logo from './logo.svg';
+import axios from 'axios';
 import './App.css';
+
+
+
+// async function loadHeros() {
+//   let hero = await axios.get(`https://localhost:8080/heros`)
+//   // console.log(hero[0]);
+// }
+
+// loadHeros();
+
+
 
 function App() {
   return (
