@@ -1,12 +1,12 @@
 @font-face {
   font-family: Bangers;
-  src: url('./fonts/Bangers-Regular.ttf');
+  src: url('../../assets/fonts/Bangers-Regular.ttf');
   font-weight: 400;
 }
 
 @font-face {
   font-family: Audiowide;
-  src: url('./fonts/Audiowide-Regular.ttf');
+  src: url('../../assets/fonts/Audiowide-Regular.ttf');
   font-weight: 400;
 }
 
@@ -25,3 +25,137 @@ $alabaster: #FAFAFA;
   box-sizing: border-box;
   font-family: Bangers;
 }
+
+.battlepage {
+  min-height: vh;
+}
+
+.battle-row {
+  display: flex; 
+  justify-content: space-between;
+}
+
+.char-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  width: 30vw;
+  gap: 10px;
+  background-color: $alabaster;
+}
+
+.char-container--hero {
+  margin-left: 5vw;
+}
+
+.char-container--enemy {
+  margin-right: 5vw;
+}
+
+.char-title {
+  color: $hero-blue;
+  font-size: 50px;
+  font-family: Bangers;
+  text-shadow: -4px -4px black;
+}
+
+.char-title--hero {
+  left: 10vw;
+}
+
+.char-title--enemy {
+  right: 10vw;
+}
+
+.char-img {
+  width: 15vw;
+}
+
+.char-vitals {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  &__stat {
+    font-family: Audiowide;
+
+    &--health {
+      color: $hero-red;
+    }
+
+    &--energy {
+      color: $hero-blue;
+    }
+
+    &--moves {
+      color: $hero-green;
+    }
+  }
+}
+
+.action-panel {
+  width: 20vw;
+  background-color: purple;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.action-desc {
+
+  &--red {
+
+  }
+
+  &--green {
+
+  }
+
+  &--blue {
+
+  }
+}
+
+.action-button {
+  color: $hero-blue;
+  margin: 0 auto;
+  font-size: 36px;
+  background-color: $mercury;
+  text-shadow: -1px -1px black;
+  border-radius: 40%;
+  border: 10px outset $silver;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+
+.cardrow {
+  display: flex;
+  justify-content: center;
+  height: 15vh;
+  background-color: $hero-yellow;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
+.card {
+  width: 5vw;
+  border: 5px inset $mercury;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  padding: 5px;
+  color: $alabaster;
+
+  &--red {
+    background-color: $hero-red;
+  }
+
+  &--blue {
+    background-color: $hero-blue;
+  }
+
+  &--green {
+    background-color: $hero-green;
+  }
+}
+

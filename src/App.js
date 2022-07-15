@@ -48,7 +48,7 @@ class App extends React.Component {
           <Route path='/opponent' render={(routerProps) => {
             return <Opponent appState={this.state} {...routerProps} />
           }} />
-          <Route path='/batle' render={(routerProps) => {
+          <Route path='/battle' render={(routerProps) => {
             return <Battle appState={this.state} {...routerProps} />
           }}/>
         </Switch>
