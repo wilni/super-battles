@@ -2,7 +2,6 @@ import axios from 'axios';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home/Home.js'
-import Opponent from './pages/Opponent/Opponent.js'
 import Battle from './pages/Battle/Battle.js'
 import './App.scss';
 const heroList = require('./data/heros.json');
@@ -88,6 +87,11 @@ class App extends React.Component {
     }
   };
 
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  // }
+
   componentDidUpdate(prevProps,prevState){
     console.log("names from did update",prevState.heroName, this.state.heroName)
     if(this.state.choosingOpponent === false){
@@ -122,10 +126,8 @@ class App extends React.Component {
           <Route path='/' exact render={(routerProps) => {
             return <Home appState={this.state} handleRadioClick={this.handleRadioClick} handleClick={this.handleClick} handleChange={this.handleChange} {...routerProps} />
           }} />
-          <Route path='/opponent' render={(routerProps) => {
-            return <Opponent appState={this.state} {...routerProps} />
-          }} />
-          <Route path='/batle' render={(routerProps) => {
+
+          <Route path='/battle' render={(routerProps) => {
             return <Battle appState={this.state} {...routerProps} />
           }}/>
         </Switch>

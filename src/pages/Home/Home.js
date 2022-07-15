@@ -1,9 +1,10 @@
 import './Home.scss';
+import {Link} from 'react-router-dom'
 import Dropdown from '../../components/Dropdown/Dropdown.js'
 
 
 function Home(props) {
-    let { appState, handleRadioClick, handleChange, handleClick } = props;
+    let { appState, handleRadioClick, handleChange, handleClick, handleSubmit } = props;
     let heroData = appState.heroData;
     let opponentData = appState.opponentData;
     console.log("appstate", appState, heroData);
@@ -42,6 +43,7 @@ function Home(props) {
                 {appState.choosingOpponent && <Dropdown list={appState.universe} opponent={appState.OpponentName} handleChange={handleChange} />}
 
                 <button onClick={handleClick} className='selection__button action-button'>{appState.choosingOpponent ? "Back" : "Next"}</button>
+                {appState.choosingOpponent && <Link to={'/battle'}><button onClick={handleSubmit} className='selection__button action-button'>FIGHT!</button></Link>}
             </div>
             {appState.choosingOpponent &&
                 <div className='selection__right'>
