@@ -1,13 +1,21 @@
 @use '../../App.scss' as *;
 
+
+
 .selection {
     background-color: $hero-red;
     min-height: 100vh;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: space-evenly;
 
+    &__left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     &__middle {
         display: flex;
         flex-direction: column;
@@ -21,6 +29,23 @@
         padding-top: 60px; 
         font-family: Bangers;
         text-shadow: -4px -4px black;
+    }
+
+    &__card{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+        border: 3px solid black;
+
+        &-image {
+            width: 20vw;
+            height: 30vw;
+        }
+        &-item{ 
+            font-family: sans-serif;
+        }
     }
 }
 
