@@ -251,7 +251,7 @@ class Battle extends React.Component {
     if (this.state.winner) {
       return(
       <div className='battlepage'>
-        <h1>{this.state.winner} WINS!!!!</h1>
+        <h1 className='winner'>{this.state.winner} WINS!!!!</h1>
       </div>
       )
     }
