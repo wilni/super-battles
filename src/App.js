@@ -15,12 +15,13 @@ class App extends React.Component {
 
   state = {
     universe: marvelHeros,
-    hero: "choose your fighter"
+    heroName: null,
+    heroData: {}
   }
 
   handleChange = (e) => {
     this.setState({
-      hero: e.target.value
+      heroName: e.target.value
     })
   };
 
@@ -36,6 +37,19 @@ class App extends React.Component {
       })
     }
   };
+
+  componentDidUpdate(prevProps,prevState){
+    console.log("names from did update",prevState.heroName, this.state.heroName)
+    if(prevState.heroName !== this.state.heroName){
+      axios.get(`http://localhost:8080/${this.state.heroName}`)
+      .then(res => {
+        console.log("res from id update",res.data);
+        this.setState({
+          heroData: res.data,
+        })
+      })
+    }
+  }
 
   render() {
     console.log(marvelHeros);

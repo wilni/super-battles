@@ -1,0 +1,47 @@
+@use '../../App.scss' as *;
+
+.selection {
+    background-color: $hero-red;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+
+    &__middle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 2rem;
+    }
+
+    &__title {
+        color: $hero-blue;
+        font-size: 60px;
+        padding-top: 60px; 
+        font-family: Bangers;
+        text-shadow: -4px -4px black;
+    }
+}
+
+.action-button {
+    color: $hero-blue;
+    margin: 0 auto;
+    font-size: 36px;
+    background-color: $mercury;
+    text-shadow: -1px -1px black;
+    border-radius: 40%;
+    border: 10px outset $silver;
+    padding: 5px 20px;
+    cursor: pointer;
+    // min-width: 170px;
+  
+    &:active {
+      border-style: inset;
+    }
+    &--alert {
+      color: $hero-red;
+    }
+  }
+
+
