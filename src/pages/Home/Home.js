@@ -41,7 +41,7 @@ function Home(props) {
                 {!appState.choosingOpponent && <Dropdown list={appState.universe} hero={appState.heroName} handleChange={handleChange} />}
                 {appState.choosingOpponent && <Dropdown list={appState.universe} opponent={appState.OpponentName} handleChange={handleChange} />}
 
-                <button onClick={handleClick} className='selection__button action-button'>Next</button>
+                <button onClick={handleClick} className='selection__button action-button'>{appState.choosingOpponent ? "Back" : "Next"}</button>
             </div>
             {appState.choosingOpponent &&
                 <div className='selection__right'>
