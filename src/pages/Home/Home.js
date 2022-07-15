@@ -1,5 +1,5 @@
 import './Home.scss';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Dropdown from '../../components/Dropdown/Dropdown.js'
 
 
@@ -15,14 +15,31 @@ function Home(props) {
                 <div className='selection__card'>
                     <img className='selection__card-image' alt='charecter' src={heroData.image} />
                     <h3>{heroData.name}</h3>
-                    <ul className='selection__card-list'>
-                        <li className='selection__card-item'>intelligence: {heroData.powerstats.intelligence}</li>
-                        <li className='selection__card-item'>strength: {heroData.powerstats.strength}</li>
-                        <li className='selection__card-item'>speed: {heroData.powerstats.speed}</li>
-                        <li className='selection__card-item'>durability: {heroData.powerstats.durability}</li>
-                        <li className='selection__card-item'>power: {heroData.powerstats.power}</li>
-                        <li className='selection__card-item'>combat: {heroData.powerstats.combat}</li>
-                    </ul>
+                    <div className='selection__card-item-holder'>
+                        <p className='selection__card-item'>Intelligence:</p>
+                        <progress id="file" className='selection__card-item-progress' max="100" value={heroData.powerstats.intelligence}> </progress>
+                    </div>
+                    <div className='selection__card-item-holder'>
+                        <p className='selection__card-item'>strength:</p>
+                        <progress id="file" className='selection__card-item-progress' max="100" value={heroData.powerstats.strength}> </progress>
+                    </div>
+                    <div className='selection__card-item-holder'>
+                        <p className='selection__card-item'>speed:</p>
+                        <progress id="file" className='selection__card-item-progress' max="100" value={heroData.powerstats.speed}> </progress>
+                    </div>
+                    <div className='selection__card-item-holder'>
+                        <p className='selection__card-item'>durability:</p>
+                        <progress id="file" className='selection__card-item-progress' max="100" value={heroData.powerstats.durability}> </progress>
+                    </div>
+                    <div className='selection__card-item-holder'>
+                        <p className='selection__card-item'>power:</p>
+                        <progress id="file" className='selection__card-item-progress' max="100" value={heroData.powerstats.power}> </progress>
+                    </div>
+                    <div className='selection__card-item-holder'>
+                    <p className='selection__card-item'>combat:</p>
+                    <progress id="file" className='selection__card-item-progress' max="100" value={heroData.powerstats.combat}> </progress>
+                    </div>
+
                 </div>
             </div>
             <div className='selection__middle'>
@@ -50,14 +67,30 @@ function Home(props) {
                     <div className='selection__card'>
                         <img className='selection__card-image' alt='charecter' src={opponentData.image} />
                         <h3>{opponentData.name}</h3>
-                        <ul className='selection__card-list'>
-                            <li className='selection__card-item'>intelligence: {opponentData.powerstats.intelligence}</li>
-                            <li className='selection__card-item'>strength: {opponentData.powerstats.strength}</li>
-                            <li className='selection__card-item'>speed: {opponentData.powerstats.speed}</li>
-                            <li className='selection__card-item'>durability: {opponentData.powerstats.durability}</li>
-                            <li className='selection__card-item'>power: {opponentData.powerstats.power}</li>
-                            <li className='selection__card-item'>combat: {opponentData.powerstats.combat}</li>
-                        </ul>
+                        <div className='selection__card-item-holder'>
+                        <p className='selection__card-item'>Intelligence:</p>
+                        <progress id="file" className='selection__card-item-progress' max="100" value={opponentData.powerstats.intelligence}> </progress>
+                    </div>
+                    <div className='selection__card-item-holder'>
+                        <p className='selection__card-item'>strength:</p>
+                        <progress id="file" className='selection__card-item-progress' max="100" value={opponentData.powerstats.strength}> </progress>
+                    </div>
+                    <div className='selection__card-item-holder'>
+                        <p className='selection__card-item'>speed:</p>
+                        <progress id="file" className='selection__card-item-progress' max="100" value={opponentData.powerstats.speed}> </progress>
+                    </div>
+                    <div className='selection__card-item-holder'>
+                        <p className='selection__card-item'>durability:</p>
+                        <progress id="file" className='selection__card-item-progress' max="100" value={opponentData.powerstats.durability}> </progress>
+                    </div>
+                    <div className='selection__card-item-holder'>
+                        <p className='selection__card-item'>power:</p>
+                        <progress id="file" className='selection__card-item-progress' max="100" value={opponentData.powerstats.power}> </progress>
+                    </div>
+                    <div className='selection__card-item-holder'>
+                    <p className='selection__card-item'>combat:</p>
+                    <progress id="file" className='selection__card-item-progress' max="100" value={opponentData.powerstats.combat}> </progress>
+                    </div>
                     </div>
                 </div>
             }
