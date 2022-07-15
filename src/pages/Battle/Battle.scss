@@ -1,0 +1,27 @@
+@font-face {
+  font-family: Bangers;
+  src: url('./fonts/Bangers-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Audiowide;
+  src: url('./fonts/Audiowide-Regular.ttf');
+  font-weight: 400;
+}
+
+$hero-red: #e11b3e; 
+$hero-blue: #1467cf;
+$hero-yellow: #d69e01;
+$hero-green: #28880d;
+$hero-brightgreen: #37ff00;
+$silver: #AFAFAF;
+$mercury: #E1E1E1;
+$alabaster: #FAFAFA;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Bangers;
+}
